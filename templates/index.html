@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websockets demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(function() {
+            var socket = io.connect('http://' + document.domain + ':' + location.port, {'multiplex': false});
+            socket.emit('start');
+
+            socket.on('cpu_update', function(msg) {
+                $("#content").append($('<li>')).text(JSON.stringify(msg));
+             });
+        });
+    </script>
+</head>
+<body>
+    <div id="content">content</div>
+</body>
+</html>
